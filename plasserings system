@@ -1,0 +1,32 @@
+bonde - pw eller pb 
+konge - Kw eller Kb 
+sprtinger - kw eller Kb
+løper - bw eller bb 
+tårn - rw eller rb 
+dronning - qw eller qr 
+tomt felt til være - //
+
+                        
+eller start posjisjonen vil være pos = [
+                                        'rw', 'kw', 'bw', 'wq', 'Kw', 'bw', 'kw', 'rw',
+                                        'pw', 'pw', 'pw', 'pw', 'pw', 'pw', 'pw', 'pw',
+                                        '//', '//', '//', '//', '//', '//', '//', '//',
+                                        '//', '//', '//', '//', '//', '//', '//', '//',
+                                        '//', '//', '//', '//', '//', '//', '//', '//',
+                                        '//', '//', '//', '//', '//', '//', '//', '//',
+                                        'pb', 'pb', 'pb', 'pb', 'pb', 'pb', 'pb', 'pb',
+                                        'rb', 'kb', 'bb', 'qb', 'Kb', 'bb', 'kb', 'rb' 
+                                       ]                       
+
+deretter skal det brukes en for løkke, if statment og en teller for å telle hvilket felt hver brikke skal plasseres. 
+Må se om det er mulig å bruke nested dictionarys
+
+def place_starter():
+    for piece in pos:
+    count = 0
+        posision = list(notation)
+        if piece == 'rw':
+            screen.blit('rw',notation[posision[count]] )
+        elif piece == 'rb':
+            #plasser svart tårn 
+        count += 1
