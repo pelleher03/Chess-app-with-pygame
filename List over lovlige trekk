@@ -1,0 +1,17 @@
+
+før man kan kjekke om hvilke trekk som hver brikke kan gjøre, må man finne ut om noen av kongene er i sjakk, om en av kongene er i sjakk må denne spilleren blokkere denne sjakken
+Det vil si at om konge_sjakk == True så må man legge til en ny regel for at et trekk skal bli sett på som lovlig 
+Dette vil også si at når en konge er i sjakk og spilleren ikke kan blokere eller fjerne sjakken, så er spilleren sjakk matt og spillet er over
+
+bonde: 
+Kan gå fram et felt, om det ikke er en annen brikke i veien, bonden kan oså ta til høyre og venstre side fremover 
+Om bonden er på rad 2 for hvit og rad 7 for svart, kan en bonde bevege seg to felter fremover.
+
+Springer: 
+
+Løper: 
+
+Konge: 
+Kan bevege og angripe i alle rettninger et felt, feks fra e2 til e3 eller e4 til f3
+
+Dronning: 
