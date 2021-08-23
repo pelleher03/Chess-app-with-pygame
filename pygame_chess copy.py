@@ -20,6 +20,8 @@ position = []
 notation = []
 sqr_size = 50
 first_click = True
+move_is_legal = False
+whites_turn = 1 
 
 running = True
 screen = pygame.display.set_mode((400, 400))
@@ -119,11 +121,27 @@ def place_pieces():
         elif piece[1] == '//':
             continue
 
-def update_pos(old_pos, piece_move):
-    pass
+def update_pos(old_pos, new_pos):
+    global pos
+    pos[pos.index(new_pos)][1] = pos[pos.index(old_pos)][1]
+    pos[pos.index(old_pos)][1] = '//'
+    
 
 def legal_moves(chess_piece):
-    pass
+    if chess_piece[1] == 'p': 
+        move_is_legal = True
+    elif chess_piece[1] == 'r':
+        move_is_legal = True
+    elif chess_piece[1] == 'b':
+        move_is_legal = True
+    elif chess_piece[1] == 'k':
+        move_is_legal = True
+    elif chess_piece[1] == 'q':
+        move_is_legal = True
+    elif chess_piece[1] == 'K':
+        move_is_legal = True
+
+        
         
 load_pieces() 
 make_notation()
@@ -146,16 +164,22 @@ while running:
                         pygame.draw.rect(screen, highlight_sqr_color, pygame.Rect(notation[sqr],(sqr_size, sqr_size)))
 
                     elif mouse_inputs[0] and first_click:
-                        original_pos = pos[position.index(sqr)][0]
-                        print(pos.index(pos[position.index(sqr)]))
-                        first_click = False
-                    elif mouse_inputs[0] and first_click == False:
-                        new_pos = pos[position.index(sqr)][0]
-                        print('From', original_pos, 'to', new_pos)
-                        first_click = True
-                        update_pos(original_pos, new_pos)
+                        original_pos = pos[position.index(sqr)]
+                        if (whites_turn == 1 and original_pos[1][1] == 'w') or (whites_turn == -1 and original_pos[1][1] == 'b'):
+                            first_click = False
+                            whites_turn = whites_turn * -1
 
-        place_pieces()            
+
+                    elif mouse_inputs[0] and first_click == False:
+                        new_pos = pos[position.index(sqr)]
+                        if new_pos == original_pos:
+                            first_click = False
+                        else: 
+                            print('From', original_pos, 'to', new_pos)
+                            first_click = True
+                            update_pos(original_pos, new_pos)
+        place_board()   
+        place_pieces()         
     pygame.display.update()
 
 pygame.quit()
