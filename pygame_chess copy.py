@@ -16,6 +16,7 @@ qw = 0
 qb = 0 
 Kw = 0 
 Kb = 0
+arrow_back = 0
 position = []
 notation = []
 sqr_size = 50
@@ -24,7 +25,7 @@ move_is_legal = False
 whites_turn = 1 
 
 running = True
-screen = pygame.display.set_mode((400, 400))
+screen = pygame.display.set_mode((400, 450))
 caption = 'Chess Game'
 pygame.display.set_caption(caption)
 
@@ -54,7 +55,7 @@ def make_notation():
 
 
 def load_pieces():
-    global pw, pb, kw, kb, bw, bb, rw, rb, qw, qb, Kw, Kb
+    global pw, pb, kw, kb, bw, bb, rw, rb, qw, qb, Kw, Kb, arrow
     Kw = pygame.image.load('whiteKing.png')
     qw = pygame.image.load('whiteQueen.png')
     rw = pygame.image.load('whiteRook.png')
@@ -68,6 +69,7 @@ def load_pieces():
     bb = pygame.image.load('blackBishop.png')
     kb = pygame.image.load('blackKnight.png')
     pb = pygame.image.load('blackPawn.png')
+    arrow = pygame.image.load('move_back_or_forward_arrow.png')
 
 
 def place_board():
@@ -86,6 +88,7 @@ def place_board():
             next_tile = next_tile * -1
         rows_placed += 1
         next_tile = next_tile * -1
+    
 
 
 def place_pieces():
@@ -120,6 +123,9 @@ def place_pieces():
             screen.blit(pb, notation[position[count]])
         elif piece[1] == '//':
             continue
+    
+    screen.blit(arrow, (150, 400))
+    screen.blit(arrow, (200, 400))
 
 def update_pos(old_pos, new_pos):
     global pos
@@ -127,9 +133,10 @@ def update_pos(old_pos, new_pos):
     pos[pos.index(old_pos)][1] = '//'
     
 
-def legal_moves(chess_piece):
+def legal_moves(chess_piece, new_move, old_move):
     if chess_piece[1] == 'p': 
         move_is_legal = True
+
     elif chess_piece[1] == 'r':
         move_is_legal = True
     elif chess_piece[1] == 'b':
@@ -174,7 +181,7 @@ while running:
                         new_pos = pos[position.index(sqr)]
                         if new_pos == original_pos:
                             first_click = False
-                        else: 
+                        else:
                             print('From', original_pos, 'to', new_pos)
                             first_click = True
                             update_pos(original_pos, new_pos)
